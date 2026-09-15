@@ -1,5 +1,7 @@
 from blockchain import Blockchain
-
+from block import Block
+from pow import proof_of_work
+from pos import proof_of_stake
 
 blockchain = Blockchain()
 
@@ -54,3 +56,39 @@ for block in blockchain.chain:
 
 
 print("\nBlockchain valid:", blockchain.is_valid())
+
+
+print("PROOF OF WORK")
+
+block = Block(
+    index=1,
+    data="Poin Loyalty",
+    previous_hash="0"
+)
+
+difficulty = 2
+
+print("\nData Block       :", block.data)
+print("Difficulty       :", difficulty)
+
+proof_of_work(block, difficulty)
+
+print("Nonce            :", block.nonce)
+print("Hash             :", block.hash)
+
+print("PROOF OF STAKE")
+
+validators = {
+    "Merchant": 10,
+    "Customer": 20,
+    "Admin": 30,
+    "Payment Gateway": 40
+}
+
+print("\nValidator:")
+for validator, stake in validators.items():
+    print(f"- {validator}: {stake} stake")
+
+selected = proof_of_stake(validators)
+
+print("\nValidator terpilih:", selected)
